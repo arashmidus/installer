@@ -187,8 +187,8 @@ export default function Home() {
               <CardContent className="px-4 sm:px-6">
                 <ContactForm />
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <Button asChild variant="default" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
-                    <Link href="tel:+15551234567" className="inline-flex items-center gap-2">
+                    <Button asChild variant="default" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
+                      <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
                       <Phone className="size-4" /> Call now
                     </Link>
                   </Button>
@@ -334,9 +334,9 @@ function Header() {
   return (
     <>
       <FadeContent>
-        <div className="w-full border-none bg-orange-600 text-orange-50">
+        <div className="w-full border-none bg-green-600 text-orange-50">
           <div className="container mx-auto px-6 py-2 text-center text-sm font-medium">
-            🎃 Halloween special — 20% off select services
+            Happy Holidays! 20% off select services
           </div>
         </div>
       </FadeContent>
@@ -356,7 +356,7 @@ function Header() {
           </nav>
           <div className="hidden md:block">
             <Button asChild size="sm" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
-              <Link href="#contact" className="inline-flex items-center gap-2">
+              <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
                 <Phone className="size-4" /> Call (818) 422-1249
               </Link>
             </Button>
@@ -413,8 +413,8 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 items-center justify-center gap-3 sm:flex sm:flex-row md:justify-start">
               <Button asChild className="w-full h-12 px-4 py-3 text-base sm:w-auto sm:h-9 sm:py-2 sm:text-sm">
-                <Link href="#contact" className="px-4 inline-flex items-center gap-2">
-                  <Phone className="size-4" /> Get a quick estimate
+                <Link href="tel:+18184221249" className="px-4 inline-flex items-center gap-2">
+                  <Phone className="size-4" /> Call us for a quick estimate
                 </Link>
               </Button>
               <Button asChild variant="outline" className="w-full h-12 py-3 text-base sm:w-auto sm:h-9 sm:py-2 sm:text-sm">
@@ -510,7 +510,7 @@ function Footer() {
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Phone className="size-4 text-primary" />
-                <Link href="tel:+15551234567" className="hover:text-foreground">(818) 422-1249</Link>
+                <Link href="tel:+18184221249" className="hover:text-foreground">(818) 422-1249</Link>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="size-4 text-primary" />
