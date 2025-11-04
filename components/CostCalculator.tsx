@@ -13,6 +13,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { toast } from "sonner";
+import CountUp from "@/components/CountUp";
 
 type LineItem = {
   id: string;
@@ -31,34 +32,29 @@ const lineItemsConfig: LineItem[] = [
     initialQty: 0,
     // $65 per box; 10% discount for quantities over 10
     pricing: (qty) => {
-      const rate = 65;
+      const rate = 150;
       const base = qty * rate;
-      return qty > 10 ? base * 0.9 : base;
+      return qty > 10 ? base * 1 : base;
     },
   },
   {
-    id: "fixtures",
-    label: "Light fixtures installed",
-    unit: "fixture",
-    pricing: (qty) => qty * 80,
+    id: "closets",
+    label: "Closet boxes installed",
+    unit: "closet",
+    pricing: (qty) => qty * 200,
   },
   {
-    id: "faucets",
-    label: "Faucets replaced",
-    unit: "faucet",
-    pricing: (qty) => qty * 120,
+    id: "Interior door",
+    label: "Interior door",
+    unit: "Door",
+    pricing: (qty) => qty * 175,
   },
   {
-    id: "rooms_painted",
-    label: "Rooms painted",
-    unit: "room",
+    id: "Exterior door",
+    label: "Exterior door",
+    unit: "Door",
     // Simple tier: first 2 rooms at $300, additional rooms at $250
-    pricing: (qty) => {
-      if (qty <= 0) return 0;
-      const firstTwo = Math.min(qty, 2) * 300;
-      const rest = Math.max(qty - 2, 0) * 250;
-      return firstTwo + rest;
-    },
+    pricing: (qty) => qty * 350,
   },
   {
     id: "hours",
@@ -213,8 +209,8 @@ export default function CostCalculator() {
       const miles = haversineMiles(from.lat, from.lon, to.lat, to.lon);
       const rounded = Math.round(miles);
       setTravelMiles(rounded);
-      const extraMiles = Math.max(0, rounded - FREE_RADIUS_MILES);
-      const cost = extraMiles + FREE_RADIUS_MILES * 2 * 1; // $1 per mile, round trip beyond free radius
+      const extraMiles = Math.max(0, rounded);
+      const cost = extraMiles * 2 - FREE_RADIUS_MILES; // $1 per mile, round trip beyond free radius
       setTravelCost(cost);
     } finally {
       setTravelLoading(false);
@@ -350,14 +346,46 @@ export default function CostCalculator() {
         </div>
 
         <div className="mt-6 flex flex-col items-stretch justify-between gap-4 rounded-xl border-none bg-white px-4 py-4 dark:bg-card sm:flex-row sm:items-center">
-          <div className="text-xl font-semibold">
-            Subtotal: <span className="inline-block rounded-md bg-zinc-100 px-2 py-0.5">{formatCurrency(subtotal + travelCost)}</span>
+          <div>
+            <div className="text-xl font-semibold">
+              Total: <span className="inline-block rounded-md bg-zinc-100 px-2 py-0.5">{formatCurrency(Math.max(499, subtotal + travelCost))}</span>
+            </div>
+            {subtotal + travelCost < 499 && (
+              <div className="mt-1 text-sm text-muted-foreground" aria-live="polite">
+                Calculated <span className="font-medium">$<CountUp to={subtotal + travelCost} /></span>; minimum charge {formatCurrency(499)} applied (+{formatCurrency(499 - (subtotal + travelCost))}).
+                <div className="mt-2 h-2 w-full max-w-[280px] rounded bg-zinc-100">
+                  <div
+                    className="h-2 rounded bg-green-600 transition-[width] duration-300"
+                    style={{ width: `${Math.min(100, Math.round(((subtotal + travelCost) / 499) * 100))}%` }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:justify-end sm:gap-2">
             <Button type="button" variant="ghost" onClick={resetAll} className="w-full sm:w-auto">Reset</Button>
-            <Button asChild className="w-full sm:w-auto">
-              <Link href="#contact">Add to estimate</Link>
+            <Button
+              type="button"
+              className="w-full sm:w-auto"
+              onClick={() => {
+                const total = Math.max(499, subtotal + travelCost);
+                const rounded = Math.round(total);
+                const input = document.querySelector<HTMLInputElement>('input#budget[name="budget"]');
+                if (input) {
+                  input.value = String(rounded);
+                  // fire input event so any listeners pick it up
+                  input.dispatchEvent(new Event('input', { bubbles: true }));
+                  // visually indicate it was set
+                  input.classList.add('ring-2','ring-green-600','bg-green-50','dark:bg-green-900/30');
+                }
+                const contact = document.getElementById('contact');
+                if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                toast.success(`Budget set to ${formatCurrency(rounded)} in the form`);
+              }}
+            >
+              Submit to contact form
             </Button>
+            
           </div>
         </div>
       </CardContent>

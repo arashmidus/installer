@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { toast } from "sonner";
+import Link from "next/link";
+import { Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -109,6 +111,11 @@ export default function ContactForm() {
       </div>
       <div className="sm:col-span-2 flex flex-wrap items-center gap-3">
         <Button type="submit" disabled={submitting}>{submitting ? "Sending…" : "Request a callback"}</Button>
+        <Button asChild variant="default" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
+          <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
+            <Phone className="size-4" /> Call now
+          </Link>
+        </Button>
       </div>
     </form>
   );

@@ -11,64 +11,31 @@ import {
 import { Badge } from "@/components/ui/badge";
 import ContactForm from "@/components/ContactForm";
 import {
-  Hammer,
-  Wrench,
   Clock,
   Phone,
   Mail,
   MapPin,
   Star,
 } from "lucide-react";
-import type { ReactNode } from "react";
 import CountUp from "@/components/CountUp";
 import CostCalculator from "@/components/CostCalculator";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import FadeContent from "@/components/FadeContent";
+import Gallery from "@/components/Gallery";
+import ServicesSection from "@/components/ServicesSection";
+import ProcessSection from "@/components/ProcessSection";
 // import ScrollVelocity from "@/components/ScrollVelocity";
 import { reviews } from "@/components/reviews.data";
 
-type Service = { icon: ReactNode; title: string; desc: string; bullets?: string[] };
-
 export default function Home() {
-  const services: Service[] = [
-    {
-      icon: <Wrench className="size-6" />,
-      title: "General Repairs",
-      desc: "Small fixes. Big relief.",
-      bullets: [
-        "Quick fixes, flawless finish.",
-        "Precision tools. Professional results.",
-        "Cleaner than we found it.",
-      ],
-    },
-    {
-      icon: <Hammer className="size-6" />,
-      title: "Installations",
-      desc: "installation of cabinets, and fixtures.",
-      bullets: [
-        "Cabinets custom‑fit to the millimeter.",
-        "Level, plumb, and soft‑close aligned.",
-        "Anchored, weight‑rated, built to last.",
-      ],
-    },
-    // { icon: <ShieldCheck className="size-6" />, title: "Safety Checks", desc: "Peace of mind at home." },
-    {
-      icon: <Clock className="size-6" />,
-      title: "Emergency Help",
-      desc: "On‑call, when time matters.",
-      bullets: [
-        "Rapid response. No downtime.",
-        "Straightforward after‑hours pricing.",
-        "Secure now. Restore fast.",
-      ],
-    },
-  ];
 
 
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
-      <Header />
+      <SiteHeader />
       <main>
         {/* SEO: LocalBusiness JSON-LD */}
         <script
@@ -81,7 +48,7 @@ export default function Home() {
               url: "https://installer.example",
               telephone: "+1-818-422-1249",
               image: [
-                "/f3a3c203-eba7-426b-aae2-e5e5f576d055.png"
+                "/Installer_man.png"
               ],
               address: {
                 "@type": "PostalAddress",
@@ -129,50 +96,8 @@ export default function Home() {
           </section>
         </FadeContent>
 
-        {/* Services */}
-        <FadeContent>
-        <section id="services" className="container mx-auto px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <Badge className="mb-4">What we do</Badge>
-            <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Carefully crafted home services, built around you
-            </h2>
-            <p className="mt-3 text-lg text-muted-foreground">
-              Expert help, thoughtfully delivered — fast, precise, and worry‑free.
-            </p>
-          </div>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <FadeContent key={s.title}>
-                <Card className="transition-shadow hover:shadow-md border-none bg-zinc-100/60 rounded-3xl shadow-none">
-                  <CardHeader className="flex items-start gap-3">
-                    <div className="rounded-md border bg-secondary/40 p-2 text-secondary-foreground">
-                      {s.icon}
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg">{s.title}</CardTitle>
-                      <CardDescription className="text-base">{s.desc}</CardDescription>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-base text-muted-foreground">
-                      {s.bullets && s.bullets.length > 0 ? (
-                        s.bullets.map((b, i) => <li key={i}>• {b}</li>)
-                      ) : (
-                        <>
-                          <li>• Clear pricing. No surprises.</li>
-                          <li>• Right on time. Every time.</li>
-                          <li>• Immaculate finishes. Built to last.</li>
-                        </>
-                      )}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </FadeContent>
-            ))}
-          </div>
-        </section>
-        </FadeContent>
+        {/* Process */}
+        <ProcessSection />
 
         {/* CTA / Lead capture */}
         <FadeContent>
@@ -186,15 +111,30 @@ export default function Home() {
               </CardHeader>
               <CardContent className="px-4 sm:px-6">
                 <ContactForm />
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <Button asChild variant="default" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
-                      <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
-                      <Phone className="size-4" /> Call now
-                    </Link>
-                  </Button>
-                </div>
               </CardContent>
             </Card>
+          </div>
+        </section>
+        </FadeContent>
+
+        {/* Services */}
+        <ServicesSection />
+
+        {/* Gallery */}
+        <FadeContent>
+        <section id="gallery" className="container mx-auto px-6 pt-0 pb-16 sm:pb-20">
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge className="mb-4">Gallery</Badge>
+            <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Recent installs</h2>
+            <p className="mt-3 text-lg text-muted-foreground">From kitchens to closets — a few highlights.</p>
+          </div>
+          <div className="mt-8">
+            {(() => {
+              const galleryImages = reviews.flatMap((r) => r.images ?? []).slice(0, 12);
+              return (
+                <Gallery images={galleryImages} mode="inline" />
+              );
+            })()}
           </div>
         </section>
         </FadeContent>
@@ -274,7 +214,7 @@ export default function Home() {
                     <Clock className="size-5 text-primary" /> Mon–Sat, 8am–6pm (emergencies after-hours)
                   </li>
                   <li className="flex items-center gap-3">
-                    <Mail className="size-5 text-primary" /> hello@example.com
+                    <Mail className="size-5 text-primary" /> installerman.info@gmail.com
                   </li>
                 </ul>
               </CardContent>
@@ -325,45 +265,8 @@ export default function Home() {
         </section>
         </FadeContent> */}
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
-  );
-}
-
-function Header() {
-  return (
-    <>
-      <FadeContent>
-        <div className="w-full border-none bg-green-600 text-orange-50">
-          <div className="container mx-auto px-6 py-2 text-center text-sm font-medium">
-            Happy Holidays! 20% off select services
-          </div>
-        </div>
-      </FadeContent>
-      <header className="sticky top-0 z-40 w-full border-none bg-zinc-50 md:-mb-16">
-        <div className="container mx-auto flex items-center justify-between px-6 py-3">
-          <Link href="#" className="flex items-center gap-2">
-            <div className="inline-flex h-8 w-8 items-center justify-center rounded-md border bg-secondary/50">
-              <Wrench className="size-4" />
-            </div>
-            <span className="text-base font-semibold tracking-tight">Installer Man</span>
-          </Link>
-          <nav className="hidden items-center gap-6 text-base md:flex">
-            <Link href="#services" className="text-muted-foreground hover:text-foreground">Services</Link>
-            <Link href="#process" className="text-muted-foreground hover:text-foreground">How it works</Link>
-            <Link href="#testimonials" className="text-muted-foreground hover:text-foreground">Reviews</Link>
-            <Link href="#contact" className="text-muted-foreground hover:text-foreground">Contact</Link>
-          </nav>
-          <div className="hidden md:block">
-            <Button asChild size="sm" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
-              <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
-                <Phone className="size-4" /> Call (818) 422-1249
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-    </>
   );
 }
 
@@ -386,7 +289,7 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
             </div>
             <div className="rounded-xl border-none bg-card shadow-none">
               <Image
-                src="/f3a3c203-eba7-426b-aae2-e5e5f576d055.png"
+                src="/Installer_man.png"
                 alt="Handyman illustration"
                 width={900}
                 height={900}
@@ -406,7 +309,7 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
               <span>Now serving LA and nearby</span>
             </Badge>
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              Repairs, made effortless
+              Cabinets and repairs, made effortless
             </h1>
             <p className="mt-4 text-md text-muted-foreground">
               Book in minutes. On time, every time. Finished with care.
@@ -456,85 +359,4 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-none bg-zinc-50">
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-md border bg-secondary/50">
-                <Wrench className="size-4" />
-              </div>
-              <span className="text-sm font-semibold">Installer Man</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Trusted repairs and installations for busy homeowners. On time, tidy,
-              and built to last.
-            </p>
-          </div>
-
-          {/* Quick links */}
-          <div>
-            <h3 className="text-sm font-semibold">Quick links</h3>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="#services" className="hover:text-foreground">Services</Link>
-              </li>
-              <li>
-                <Link href="#process" className="hover:text-foreground">How it works</Link>
-              </li>
-              <li>
-                <Link href="#testimonials" className="hover:text-foreground">Reviews</Link>
-              </li>
-              <li>
-                <Link href="#contact" className="hover:text-foreground">Contact</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold">Popular services</h3>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>General repairs</li>
-              <li>Installations</li>
-              <li>Emergency help</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-sm font-semibold">Get in touch</h3>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <Phone className="size-4 text-primary" />
-                <Link href="tel:+18184221249" className="hover:text-foreground">(818) 422-1249</Link>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="size-4 text-primary" />
-                <Link href="mailto:hello@example.com" className="hover:text-foreground">hello@example.com</Link>
-              </li>
-              <li className="flex items-center gap-2">
-                <Clock className="size-4 text-primary" /> Mon–Sat, 8am–6pm
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="size-4 text-primary" /> Los Angeles & nearby
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs text-muted-foreground sm:flex-row">
-          <div>© {new Date().getFullYear()} Installer Man. All rights reserved.</div>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="hover:text-foreground">Terms</Link>
-            <span aria-hidden>•</span>
-            <Link href="#" className="hover:text-foreground">Privacy</Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
+// Footer moved to components/SiteFooter
