@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SquareLibrary, Phone, Mail, Clock, MapPin } from "lucide-react";
+import { Drill, Phone, Mail, Clock, MapPin } from "lucide-react";
 
 export default function SiteFooter() {
   return (
@@ -8,9 +8,9 @@ export default function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-md border bg-secondary/50">
-                <SquareLibrary className="size-6" />
+            <div className="flex items-center gap-0.5">
+              <div className="inline-flex h-8 w-8 border-none items-center justify-center rounded-md border bg-secondary/50">
+                <Drill className="size-5" />
               </div>
               <span className="text-sm font-semibold">Installer Man</span>
             </div>

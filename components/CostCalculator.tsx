@@ -383,7 +383,7 @@ export default function CostCalculator() {
                 toast.success(`Budget set to ${formatCurrency(rounded)} in the form`);
               }}
             >
-              Submit to contact form
+              Submit estimate
             </Button>
             
           </div>
