@@ -103,7 +103,7 @@ export default function ContactForm() {
       </div>
       <div className="sm:col-span-2 space-y-2">
         <Label htmlFor="budget">Approximate budget</Label>
-        <Input id="budget" name="budget" type="number" min="0" step="50" placeholder="e.g. 200" className="border-zinc-200 bg-white rounded-md shadow-none" />
+        <Input id="budget" name="budget" type="text" inputMode="numeric" placeholder="e.g. $500, 500-1000, or around 500" className="border-zinc-200 bg-white rounded-md shadow-none" />
       </div>
       <div className="sm:col-span-2 space-y-2">
         <Label htmlFor="details">Project details</Label>

@@ -152,7 +152,7 @@ export default function CostCalculator() {
 
   // Travel calculation state
   const ORIGIN_ZIP = "91304";
-  const FREE_RADIUS_MILES = 15;
+  const FREE_RADIUS_MILES = 7.5;
   const [travelZip, setTravelZip] = React.useState<string>("");
   const [travelMiles, setTravelMiles] = React.useState<number | null>(null);
   const [travelCost, setTravelCost] = React.useState<number>(0);
@@ -212,7 +212,7 @@ export default function CostCalculator() {
       // $5 per mile for round trip beyond free radius (first 15 miles free)
       const milesBeyondFreeRadius = Math.max(0, rounded - FREE_RADIUS_MILES);
       const roundTripMilesBeyondFreeRadius = milesBeyondFreeRadius * 2;
-      const cost = roundTripMilesBeyondFreeRadius * 5; // $5 per mile
+      const cost = roundTripMilesBeyondFreeRadius * 1; // $5 per mile
       setTravelCost(cost);
     } finally {
       setTravelLoading(false);
@@ -287,7 +287,7 @@ export default function CostCalculator() {
                 <Label htmlFor="travel-zip" className="text-base">
                   Travel to ZIP code
                 </Label>
-                <span className="text-sm text-muted-foreground">15 miles free; beyond is $1/mi round trip.</span>
+                <span className="text-sm text-muted-foreground">15 miles free; beyond is $1/mi.</span>
                 <div className="mt-2 sm:hidden">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex-1 max-w-[260px]">
@@ -312,10 +312,10 @@ export default function CostCalculator() {
                     </div>
                     <div className="min-w-[100px] text-right">
                       <span className="inline-block rounded-md bg-zinc-100 px-3 py-1 font-medium">{formatCurrency(travelCost)}</span>
+                      {travelMiles !== null && <div className="mt-1 text-xs text-muted-foreground">Distance: {travelMiles * 2} mi</div>}
+                      {travelError && <div className="mt-1 text-xs text-destructive sr-only">{travelError}</div>}
                     </div>
                   </div>
-                  {travelMiles !== null && <div className="text-xs text-muted-foreground">Distance: {travelMiles} mi</div>}
-                  {travelError && <div className="text-xs text-destructive sr-only">{travelError}</div>}
                 </div>
               </div>
               <div className="hidden sm:block">
@@ -340,7 +340,7 @@ export default function CostCalculator() {
               </div>
               <div className="hidden text-right sm:block">
                 <span className="inline-block rounded-md bg-zinc-100 px-3 py-1 font-medium">{formatCurrency(travelCost)}</span>
-                {travelMiles !== null && <div className="mt-1 text-xs text-muted-foreground">{travelMiles} mi</div>}
+                {travelMiles !== null && <div className="mt-1 text-xs text-muted-foreground">Distance: {travelMiles * 2} mi</div>}
                 {travelError && <div className="mt-1 text-xs text-destructive sr-only">{travelError}</div>}
               </div>
             </div>
@@ -350,7 +350,7 @@ export default function CostCalculator() {
         <div className="mt-6 flex flex-col items-stretch justify-between gap-4 rounded-xl border-none bg-white px-4 py-4 dark:bg-card sm:flex-row sm:items-center">
           <div>
             <div className="text-xl font-semibold">
-              Total: <span className="inline-block rounded-md bg-zinc-100 px-2 py-0.5">{formatCurrency(Math.max(499, subtotal + travelCost))}</span>
+              Starting at: <span className="inline-block rounded-md bg-zinc-100 px-2 py-0.5">{formatCurrency(Math.max(499, subtotal + travelCost))}</span>
             </div>
             {subtotal + travelCost < 499 && (
               <div className="mt-1 text-sm text-muted-foreground" aria-live="polite">
