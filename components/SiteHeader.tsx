@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import FadeContent from "@/components/FadeContent";
-import { Phone, Menu, Wrench, ChefHat, Box, Trash2, DoorOpen, Home, Drill, SquareLibrary } from "lucide-react";
+import { Phone, Menu, Wrench, ChefHat, Box, Trash2, DoorOpen, Home, Drill, Images, Instagram } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -140,7 +140,7 @@ export default function SiteHeader() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link href="#process" className="px-3 py-2 rounded-md hover:bg-zinc-100">How it works</Link>
+                    <Link href="/#process" className="px-3 py-2 rounded-md hover:bg-zinc-100">How it works</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
@@ -150,12 +150,17 @@ export default function SiteHeader() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link href="#testimonials" className="px-3 py-2 rounded-md hover:bg-zinc-100">Reviews</Link>
+                    <Link href="/#testimonials" className="px-3 py-2 rounded-md hover:bg-zinc-100">Reviews</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link href="#contact" className="px-3 py-2 rounded-md hover:bg-zinc-100">Contact</Link>
+                    <Link href="/#gallery" className="px-3 py-2 rounded-md hover:bg-zinc-100">Gallery</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/#contact" className="px-3 py-2 rounded-md hover:bg-zinc-100">Contact</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -172,7 +177,12 @@ export default function SiteHeader() {
           </div>
 
           {/* Mobile menu */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <Button asChild size="sm" className="bg-green-600/90 text-primary-foreground hover:bg-green-600">
+              <Link href="tel:+18184221249" className="inline-flex items-center gap-2">
+                <Phone className="size-4" /> Call (818) 422-1249
+              </Link>
+            </Button>
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" aria-label="Open menu">
@@ -184,11 +194,20 @@ export default function SiteHeader() {
                   <SheetTitle>Menu</SheetTitle>
                 </SheetHeader>
                 <nav className="grid gap-1 p-2 text-base">
-                  <Link href="#services" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Services</Link>
+                  <Link href="/" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100 inline-flex items-center gap-2">
+                    <Home className="size-4" /> Home
+                  </Link>
+                  <Link href="/#services" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Services</Link>
                   <Link href="/about" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">About</Link>
-                  <Link href="#process" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">How it works</Link>
-                  <Link href="#testimonials" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Reviews</Link>
-                  <Link href="#contact" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Contact</Link>
+                  <Link href="/#process" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">How it works</Link>
+                  <Link href="/#testimonials" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Reviews</Link>
+                  <Link href="/#gallery" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100 inline-flex items-center gap-2">
+                    <Images className="size-4" /> Gallery
+                  </Link>
+                  <Link href="/#contact" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100">Contact</Link>
+                  <Link href="https://www.instagram.com/installer.man" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-zinc-100 inline-flex items-center gap-2">
+                    <Instagram className="size-4" /> Instagram
+                  </Link>
                 </nav>
                 <div className="p-2">
                   <Button asChild className="w-full">

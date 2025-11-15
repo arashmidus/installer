@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Drill, Phone, Mail, Clock, MapPin } from "lucide-react";
+import { Drill, Phone, Mail, Clock, MapPin, Instagram } from "lucide-react";
 
 export default function SiteFooter() {
   return (
@@ -25,16 +25,16 @@ export default function SiteFooter() {
             <h3 className="text-sm font-semibold">Quick links</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="#services" className="hover:text-foreground">Services</Link>
+                <Link href="/#services" className="hover:text-foreground">Services</Link>
               </li>
               <li>
-                <Link href="#process" className="hover:text-foreground">How it works</Link>
+                <Link href="/#process" className="hover:text-foreground">How it works</Link>
               </li>
               <li>
-                <Link href="#testimonials" className="hover:text-foreground">Reviews</Link>
+                <Link href="/#testimonials" className="hover:text-foreground">Reviews</Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-foreground">Contact</Link>
+                <Link href="/#contact" className="hover:text-foreground">Contact</Link>
               </li>
             </ul>
           </div>
@@ -66,6 +66,10 @@ export default function SiteFooter() {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="size-4 text-primary" /> Los Angeles & nearby
+              </li>
+              <li className="flex items-center gap-2">
+                <Instagram className="size-4 text-primary" />
+                <Link href="https://www.instagram.com/installer.man" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Follow us on Instagram</Link>
               </li>
             </ul>
           </div>

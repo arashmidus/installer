@@ -128,7 +128,7 @@ export default function Home() {
             <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Recent installs</h2>
             <p className="mt-3 text-lg text-muted-foreground">From kitchens to closets — a few highlights.</p>
           </div>
-          <div className="mt-8">
+          <div id="gallery" className="mt-8">
             {(() => {
               const galleryImages = reviews.flatMap((r) => r.images ?? []).slice(0, 12);
               return (
@@ -309,7 +309,7 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
               <span>Now serving LA and nearby</span>
             </Badge>
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              Cabinets and repairs, made effortless
+              Cabinet Installation and repairs, made effortless
             </h1>
             <p className="mt-4 text-md text-muted-foreground">
               Book in minutes. On time, every time. Finished with care.

@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
     publisher: "Installer Man",
     openGraph: {
       type: "website",
-      url: "/",
+      url: siteUrl,
       title,
       description,
       siteName: "Installer Man",
