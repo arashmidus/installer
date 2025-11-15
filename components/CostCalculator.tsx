@@ -209,8 +209,10 @@ export default function CostCalculator() {
       const miles = haversineMiles(from.lat, from.lon, to.lat, to.lon);
       const rounded = Math.round(miles);
       setTravelMiles(rounded);
-      const extraMiles = Math.max(0, rounded);
-      const cost = extraMiles * 2 - FREE_RADIUS_MILES; // $1 per mile, round trip beyond free radius
+      // $5 per mile for round trip beyond free radius (first 15 miles free)
+      const milesBeyondFreeRadius = Math.max(0, rounded - FREE_RADIUS_MILES);
+      const roundTripMilesBeyondFreeRadius = milesBeyondFreeRadius * 2;
+      const cost = roundTripMilesBeyondFreeRadius * 5; // $5 per mile
       setTravelCost(cost);
     } finally {
       setTravelLoading(false);
@@ -285,7 +287,7 @@ export default function CostCalculator() {
                 <Label htmlFor="travel-zip" className="text-base">
                   Travel to ZIP code
                 </Label>
-                <span className="text-sm text-muted-foreground">First 15 miles free; beyond is $1/mi round trip.</span>
+                <span className="text-sm text-muted-foreground">15 miles free; beyond is $1/mi round trip.</span>
                 <div className="mt-2 sm:hidden">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex-1 max-w-[260px]">
