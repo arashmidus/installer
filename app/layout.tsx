@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_US",
       images: [
         {
-          url: "/f3a3c203-eba7-426b-aae2-e5e5f576d055.png",
+          url: "/og-installer.png",
           width: 1200,
           height: 630,
           alt: "Installer Man — trusted handyman services",
@@ -57,7 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       images: [
-        "/f3a3c203-eba7-426b-aae2-e5e5f576d055.png",
+        "/og-installer.png",
       ],
     },
     robots: {
