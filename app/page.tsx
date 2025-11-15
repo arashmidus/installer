@@ -309,7 +309,7 @@ function Hero({ reviews }: { reviews: { headline: string; body: string; name: st
               <span>Now serving LA and nearby</span>
             </Badge>
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-              Cabinet Installation and repairs, made effortless
+              Cabinets, Installations, and repairs, made effortless
             </h1>
             <p className="mt-4 text-md text-muted-foreground">
               Book in minutes. On time, every time. Finished with care.
